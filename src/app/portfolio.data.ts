@@ -1,7 +1,7 @@
 export interface Project { title: string; description: string; role: string; tools: string[]; image: string; projectUrl: string; githubUrl?: string; }
 export const portfolio = {
   name:'Janine Calcetas', role:'Virtual Assistant', specialty:'Administrative, Digital & Technical Support', bio:'Detail-oriented IT professional with experience in documentation, reporting automation, issue resolution, digital tools, and cross-functional support. I help teams stay organized, efficient, and productive.',
-  email:'ricajaninecalcetas@gmail.com', phone:'+63 977 613 0074', location:'Sta. Cruz, Manila, Philippines', linkedin:'https://www.linkedin.com/in/rj-calcetas/', upwork:'https://www.upwork.com/', github:'https://github.com/', resumeUrl:'/New-CV-Template.pdf',
+  email:'ricajaninecalcetas@gmail.com', phone:'+63 977 613 0074', location:'Sta. Cruz, Manila, Philippines', linkedin:'https://www.linkedin.com/in/rj-calcetas/', upwork:'https://www.upwork.com/', github:'https://github.com/', resumeUrl:'New-CV-Template.pdf',
   services:[
     {icon:'inbox',title:'Administrative Support',text:'Email management, file organization, scheduling, and general administrative tasks.'},{icon:'grid',title:'Data Management',text:'Data entry, spreadsheets, reports, and information organization.'},{icon:'chat',title:'Communication',text:'Client communication, updates, and task coordination.'},{icon:'search',title:'Research',text:'Internet research and accurate information gathering.'},{icon:'spark',title:'Tools & Automation',text:'Working with digital tools and basic workflow automation.'},{icon:'edit',title:'Content Support',text:'Basic content preparation, Canva designs, and document preparation.'}
   ],
