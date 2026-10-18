@@ -1,22 +1,87 @@
 <main class="portfolio" aria-label="Janine Calcetas portfolio">
+  <div class="bg-decor bg-decor-one" aria-hidden="true"></div>
+  <div class="bg-decor bg-decor-two" aria-hidden="true"></div>
+  <div class="bg-decor bg-decor-three" aria-hidden="true"></div>
+  <div class="bg-decor bg-decor-four" aria-hidden="true"></div>
+
   <p class="eyebrow top-label">JANINE CALCETAS · PORTFOLIO</p>
-  <section class="book-wrap" [class.is-turning]="animating()" [class.turn-back]="direction()==='backward'" (pointerdown)="onPointerDown($event)" (pointerup)="onPointerUp($event)">
-    <nav class="tabs" aria-label="Portfolio sections">@for(tab of tabs;track tab.label){<button type="button" [class.active]="activeTab===tab.label" (click)="navigate(tab.page)" [attr.aria-current]="activeTab===tab.label?'page':null"><span aria-hidden="true">{{icon(tab.icon)}}</span><span class="tab-label">{{tab.label}}</span></button>}</nav>
+
+  <section
+    class="book-wrap"
+    [class.is-turning]="animating()"
+    [class.turn-back]="direction() === 'backward'"
+    (pointerdown)="onPointerDown($event)"
+    (pointerup)="onPointerUp($event)"
+  >
+    <nav class="tabs" aria-label="Portfolio sections">
+      @for (tab of tabs; track tab.label) {
+        <button
+          type="button"
+          [class.active]="activeTab === tab.label"
+          (click)="navigate(tab.page)"
+          [attr.aria-current]="activeTab === tab.label ? 'page' : null"
+        >
+          <span aria-hidden="true">{{ icon(tab.icon) }}</span>
+          <span class="tab-label">{{ tab.label }}</span>
+        </button>
+      }
+    </nav>
+
     <div class="book" aria-live="polite">
-      <div class="page desktop-page left"><ng-container *ngTemplateOutlet="pageContent;context:{$implicit:spreadStart}"/><span class="page-no">{{(spreadStart+1).toString().padStart(2,'0')}}</span></div>
-      <div class="page desktop-page right">@if(spreadStart+1<=6){<ng-container *ngTemplateOutlet="pageContent;context:{$implicit:spreadStart+1}"/><span class="page-no">{{(spreadStart+2).toString().padStart(2,'0')}}</span>}</div>
-      <div class="page mobile-page"><ng-container *ngTemplateOutlet="pageContent;context:{$implicit:current()}"/><span class="page-no">{{(current()+1).toString().padStart(2,'0')}} / 07</span></div>
-      @if(animating()){<div class="turning-sheet" aria-hidden="true"></div>}
+      <div class="page desktop-page left">
+        @switch (spreadStart) {
+          @case (0) { <app-home-page [navigate]="navigate.bind(this)" [icon]="icon.bind(this)" /> }
+          @case (1) { <app-services-page [icon]="icon.bind(this)" /> }
+          @case (2) { <app-about-page /> }
+          @case (3) { <app-experience-page /> }
+          @case (4) { <app-projects-page /> }
+          @case (5) { <app-skills-page /> }
+          @case (6) { <app-contact-page /> }
+        }
+        <span class="page-no">{{ (spreadStart + 1).toString().padStart(2, '0') }}</span>
+      </div>
+
+      <div class="page desktop-page right">
+        @if (spreadStart + 1 <= 6) {
+          @switch (spreadStart + 1) {
+            @case (0) { <app-home-page [navigate]="navigate.bind(this)" [icon]="icon.bind(this)" /> }
+            @case (1) { <app-services-page [icon]="icon.bind(this)" /> }
+            @case (2) { <app-about-page /> }
+            @case (3) { <app-experience-page /> }
+            @case (4) { <app-projects-page /> }
+            @case (5) { <app-skills-page /> }
+            @case (6) { <app-contact-page /> }
+          }
+          <span class="page-no">{{ (spreadStart + 2).toString().padStart(2, '0') }}</span>
+        }
+      </div>
+
+      <div class="page mobile-page">
+        @switch (current()) {
+          @case (0) { <app-home-page [navigate]="navigate.bind(this)" [icon]="icon.bind(this)" /> }
+          @case (1) { <app-services-page [icon]="icon.bind(this)" /> }
+          @case (2) { <app-about-page /> }
+          @case (3) { <app-experience-page /> }
+          @case (4) { <app-projects-page /> }
+          @case (5) { <app-skills-page /> }
+          @case (6) { <app-contact-page /> }
+        }
+        <span class="page-no">{{ (current() + 1).toString().padStart(2, '0') }} / 07</span>
+      </div>
+
+      @if (animating()) {
+        <div class="turning-sheet" aria-hidden="true"></div>
+      }
     </div>
   </section>
-  <div class="book-controls"><button (click)="previous()" [disabled]="current()===0||animating()" aria-label="Previous page">←</button><span>{{pages[current()]}}</span><button (click)="next()" [disabled]="current()===6||animating()" aria-label="Next page">→</button></div>
-  <ng-template #pageContent let-page>@switch(page){
-    @case(0){<article class="content home-content"><p class="script">Hello, I'm</p><h1>{{data.name}}</h1><p class="role">{{data.role}}</p><p class="specialty">{{data.specialty}}</p><p class="lead">{{data.bio}}</p><div class="actions"><button class="primary" (click)="navigate(4)">View Projects →</button><button class="text-btn" (click)="navigate(2)">About Me</button></div><svg class="plant" viewBox="0 0 160 80" aria-hidden="true"><path d="M25 66h110M64 65l-6-24h40l-6 24M78 41V16m0 19c-18-3-20-15-20-15s17-2 20 11m1-4c13-16 28-9 28-9s-8 16-28 17"/><path d="M15 65h32v-18H15zM20 47v-9h22v9"/></svg></article>}
-    @case(1){<article class="content"><p class="kicker">SERVICES</p><h2>What I Do</h2><p class="intro">I provide support with organization, communication, data management, and daily operations.</p><div class="service-grid">@for(s of data.services;track s.title){<div class="service-card"><span class="line-icon">{{icon(s.icon)}}</span><h3>{{s.title}}</h3><p>{{s.text}}</p></div>}</div></article>}
-    @case(2){<article class="content about-content"><p class="kicker">A LITTLE ABOUT ME</p><h2>Professional support,<br><em>thoughtfully delivered.</em></h2><p>I am an IT graduate and Associate Front-end Software Engineer expanding into Virtual Assistant and Administrative & Digital Support work.</p><p>At Manulife IT Delivery Center Asia, I work with performance reporting, workflow automation, issue investigation, support tickets, production incidents, and deployment processes. This experience helps me bring structure, accuracy, and calm problem-solving to digital support work.</p><blockquote>“I bring order to the details, so you can focus on the bigger picture.”</blockquote><p class="education"><strong>Education</strong><br>{{data.education}}</p></article>}
-    @case(3){<article class="content experience-content"><p class="kicker">EXPERIENCE</p><h2>What I Bring</h2><div class="experience-list">@for(job of data.experience;track job.role){<div class="job"><span>{{job.period}}</span><h3>{{job.role}}</h3><b>{{job.company}}</b><p>{{job.summary}}</p></div>}</div><div class="certs"><strong>Selected certifications</strong><p>{{data.certifications.join(' · ')}}</p></div></article>}
-    @case(4){<article class="content project-content"><p class="kicker">SELECTED WORK</p><h2>Projects</h2><div class="projects">@for(p of data.projects;track p.title;let i=$index){<article class="project-card"><div [class]="'project-visual '+p.image"><b>{{i+1}}</b><i></i><i></i><i></i></div><div class="project-copy"><p class="project-role">{{p.role}}</p><h3>{{p.title}}</h3><p>{{p.description}}</p><div class="chips">@for(tool of p.tools;track tool){<span>{{tool}}</span>}</div><div class="project-links"><a [href]="p.projectUrl">View Project →</a>@if(p.githubUrl){<a [href]="p.githubUrl" target="_blank" rel="noopener">GitHub</a>}</div></div></article>}</div></article>}
-    @case(5){<article class="content skills-content"><p class="kicker">CAPABILITIES</p><h2>Skills & Tools</h2><section><h3>Virtual Assistant Skills</h3><div class="chips large">@for(s of data.skills.va;track s){<span>{{s}}</span>}</div></section><section><h3>Tools I Work With</h3><div class="chips large tools">@for(s of data.skills.tools;track s){<span>{{s}}</span>}</div></section><section class="technical"><h3>Technical Background</h3><p>A useful foundation for digital workflows and learning new systems.</p><div class="chips">@for(s of data.skills.technical;track s){<span>{{s}}</span>}</div></section></article>}
-    @case(6){<article class="content contact-content"><p class="kicker">GET IN TOUCH</p><h2>Let's Work<br><em>Together.</em></h2><p class="lead">I'm open to Virtual Assistant opportunities, administrative support projects, and long-term collaborations.</p><a class="email" [href]="'mailto:'+data.email">{{data.email}} ↗</a><a class="phone" [href]="'tel:'+data.phone">{{data.phone}}</a><div class="socials"><a [href]="data.linkedin" target="_blank" rel="noopener">LinkedIn ↗</a><a [href]="data.upwork" target="_blank" rel="noopener">Upwork ↗</a><a [href]="data.github" target="_blank" rel="noopener">GitHub ↗</a></div><a class="primary resume" [href]="data.resumeUrl" download>Download Resume ↓</a><p class="available"><span></span> Available for Remote Work — {{data.location}}</p></article>}
-  }</ng-template>
+
+  <div class="book-controls">
+    <button (click)="previous()" [disabled]="current() === 0 || animating()" aria-label="Previous page">
+      ←
+    </button>
+    <span>{{ pages[current()] }}</span>
+    <button (click)="next()" [disabled]="current() === 6 || animating()" aria-label="Next page">
+      →
+    </button>
+  </div>
 </main>

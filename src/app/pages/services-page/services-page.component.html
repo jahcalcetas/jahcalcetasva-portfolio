@@ -1,0 +1,17 @@
+<article class="content">
+  <p class="kicker">SERVICES</p>
+  <h2>What I Do</h2>
+  <p class="intro">
+    I support businesses and teams with efficient operations, digital workflows, and polished communication—combining administrative expertise, technical skills, and creative execution to keep work organized and running smoothly.
+  </p>
+
+  <div class="service-grid">
+    @for (service of data.services; track service.title) {
+      <div class="service-card">
+        <span class="line-icon">{{ icon(service.icon) }}</span>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.text }}</p>
+      </div>
+    }
+  </div>
+</article>

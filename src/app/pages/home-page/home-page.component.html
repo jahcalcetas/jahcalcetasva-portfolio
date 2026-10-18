@@ -1,0 +1,17 @@
+<article class="content home-content">
+  <p class="script">Hello, I'm</p>
+  <h1>{{ data.name }}</h1>
+  <p class="role">{{ data.role }}</p>
+  <p class="specialty">{{ data.specialty }}</p>
+  <p class="lead">{{ data.bio }}</p>
+
+  <div class="actions">
+    <button class="primary" (click)="navigate(4)">View Projects →</button>
+    <button class="text-btn" (click)="navigate(2)">About Me</button>
+  </div>
+
+  <svg class="plant" viewBox="0 0 160 80" aria-hidden="true">
+    <path d="M25 66h110M64 65l-6-24h40l-6 24M78 41V16m0 19c-18-3-20-15-20-15s17-2 20 11m1-4c13-16 28-9 28-9s-8 16-28 17" />
+    <path d="M15 65h32v-18H15zM20 47v-9h22v9" />
+  </svg>
+</article>

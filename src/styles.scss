@@ -1,3 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,500&display=swap');
-:root{--bg:#faf9f5;--paper:#fffdf7;--cream:#f3eddd;--accent:#d4ad45;--accent-soft:#f0dda4;--ink:#33312c;--muted:#77736a;--line:#ded8ca;--brown:#7a6040}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid #8b6b19;outline-offset:3px}
+:root {
+  --bg: #fffdf6;
+  --paper: #fffefb;
+  --cream: #fff3c8;
+  --accent: #f5c94a;
+  --accent-strong: #e2ad1a;
+  --accent-soft: #fff0af;
+  --ink: #2f2a22;
+  --muted: #645f55;
+  --line: #f0e4b7;
+  --brown: #8b6b2f;
+  --shadow: rgba(107, 84, 22, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: linear-gradient(180deg, #fffef8 0%, #fff7d9 100%);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+}
+
+button, a { font: inherit; }
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--accent-strong);
+  outline-offset: 3px;
+}

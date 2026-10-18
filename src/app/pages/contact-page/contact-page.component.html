@@ -1,0 +1,22 @@
+<article class="content contact-content">
+  <p class="kicker">GET IN TOUCH</p>
+  <h2>
+    Let's Work<br />
+    <em>Together.</em>
+  </h2>
+  <p class="lead">
+    I'm open to Virtual Assistant opportunities, administrative support projects, and long-term
+    collaborations.
+  </p>
+  <a class="email" [href]="'mailto:' + data.email">{{ data.email }} ↗</a>
+  <a class="phone" [href]="'tel:' + data.phone">{{ data.phone }}</a>
+
+  <div class="socials">
+    <a [href]="data.linkedin" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a [href]="data.upwork" target="_blank" rel="noopener">Upwork ↗</a>
+    <a [href]="data.github" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+
+  <a class="primary resume" [href]="data.resumeUrl" download>Download Resume ↓</a>
+  <p class="available"><span></span> Available for Remote Work — {{ data.location }}</p>
+</article>

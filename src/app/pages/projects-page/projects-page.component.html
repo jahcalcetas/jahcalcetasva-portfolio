@@ -1,0 +1,75 @@
+<article class="content project-content">
+  <p class="kicker">SELECTED WORK</p>
+  <h2>Projects</h2>
+
+  <div class="project-filters" aria-label="Project categories">
+    @for (category of categories; track category.key) {
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="selectedCategory() === category.key"
+        (click)="setCategory(category.key)"
+      >
+        {{ category.label }}
+      </button>
+    }
+  </div>
+
+  <div class="projects">
+    @for (project of filteredProjects; track project.title; let i = $index) {
+      <article class="project-card">
+        <div class="project-preview">
+          @if (project.previewUrl) {
+            <iframe
+              [src]="getSafePreviewUrl(project.previewUrl)"
+              [title]="project.title"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          } @else {
+            <div class="project-preview-placeholder">
+              <span>{{ project.title }}</span>
+            </div>
+          }
+
+          @if (project.image) {
+            <img
+              [src]="project.image"
+              [alt]="project.title"
+              style="position:absolute; right:10px; bottom:10px; width:72px; height:72px; object-fit:cover; border-radius:12px; border:2px solid rgba(255,255,255,0.8); box-shadow:0 8px 18px rgba(15,23,42,0.12); background:#fff;"
+            />
+          }
+        </div>
+
+        <div class="project-copy">
+          <div class="project-meta">
+            <span class="project-role">{{ project.role }}</span>
+            <span class="project-category-badge">{{ project.category }}</span>
+          </div>
+
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+
+          <div class="chips">
+            @for (tool of project.tools; track tool) {
+              <span>{{ tool }}</span>
+            }
+          </div>
+
+          <div class="project-links">
+            <a
+              [href]="project.previewUrl || project.projectUrl"
+              [attr.target]="project.previewUrl ? '_blank' : null"
+              [attr.rel]="project.previewUrl ? 'noopener noreferrer' : null"
+            >
+              View Project →
+            </a>
+            @if (project.githubUrl) {
+              <a [href]="project.githubUrl" target="_blank" rel="noopener">GitHub</a>
+            }
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+</article>

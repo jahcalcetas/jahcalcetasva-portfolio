@@ -1,0 +1,32 @@
+<article class="content skills-content">
+  <p class="kicker">CAPABILITIES</p>
+  <h2>Skills &amp; Tools</h2>
+
+  <section>
+    <h3>Virtual Assistant Skills</h3>
+    <div class="chips large">
+      @for (skill of data.skills.va; track skill) {
+        <span>{{ skill }}</span>
+      }
+    </div>
+  </section>
+
+  <section>
+    <h3>Tools I Work With</h3>
+    <div class="chips large tools">
+      @for (tool of data.skills.tools; track tool) {
+        <span>{{ tool }}</span>
+      }
+    </div>
+  </section>
+
+  <section class="technical">
+    <h3>Technical Background</h3>
+    <p>A useful foundation for digital workflows and learning new systems.</p>
+    <div class="chips">
+      @for (tech of data.skills.technical; track tech) {
+        <span>{{ tech }}</span>
+      }
+    </div>
+  </section>
+</article>
